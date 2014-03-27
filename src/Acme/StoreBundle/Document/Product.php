@@ -14,7 +14,14 @@ class Product
      * @MongoDB\Id
      */
     protected $id;
-
+    
+    
+    /**
+     *
+     * @MongoDB\String 
+     */
+    protected $producto_id;
+    
     /**
      * @MongoDB\String
      */
@@ -33,9 +40,9 @@ class Product
      * @param string $id
      * @return self
      */
-    public function setId($id)
+    public function setProductoId($id)
     {
-        $this->id = $id;
+        $this->producto_id = $id;
         return $this;
     }
     

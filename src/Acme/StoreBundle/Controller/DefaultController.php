@@ -17,7 +17,7 @@ class DefaultController extends Controller
     public function createAction()
     {
         $product = new Product();
-        $product->setId('1');
+        $product->setProductoId('1');
         $product->setName('AAA');
         $product->setPrice('19.99');
 
