@@ -1,0 +1,7 @@
+acme_store_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: AcmeStoreBundle:Default:create }
+
+acme_store_vista:
+    pattern:  /mongodb/
+    defaults: { _controller: AcmeStoreBundle:Default:show }
