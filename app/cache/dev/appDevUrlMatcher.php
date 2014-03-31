@@ -135,18 +135,66 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // acme_store_homepage
-        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'acme_store_homepage')), array (  '_controller' => 'Acme\\StoreBundle\\Controller\\DefaultController::createAction',));
-        }
-
-        // acme_store_vista
-        if (rtrim($pathinfo, '/') === '/mongodb') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'acme_store_vista');
+        if (0 === strpos($pathinfo, '/question')) {
+            // acme_question_homepage
+            if ($pathinfo === '/question') {
+                return array (  '_controller' => 'Acme\\QuestionBundle\\Controller\\QuestionController::indexAction',  '_route' => 'acme_question_homepage',);
             }
 
-            return array (  '_controller' => 'Acme\\StoreBundle\\Controller\\DefaultController::showAction',  '_route' => 'acme_store_vista',);
+            // acme_question_question
+            if (preg_match('#^/question/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'acme_question_question')), array (  '_controller' => 'Acme\\QuestionBundle\\Controller\\QuestionController::questionAction',));
+            }
+
+            // acme_question_create
+            if (0 === strpos($pathinfo, '/question/create') && preg_match('#^/question/create/(?P<pregunta>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'acme_question_create')), array (  '_controller' => 'Acme\\QuestionBundle\\Controller\\QuestionController::createAction',));
+            }
+
+            // acme_question_deleteAll
+            if ($pathinfo === '/question/delete') {
+                return array (  '_controller' => 'Acme\\QuestionBundle\\Controller\\QuestionController::deleteAllAction',  '_route' => 'acme_question_deleteAll',);
+            }
+
+            // acme_question_answers
+            if ($pathinfo === '/question/answers') {
+                return array (  '_controller' => 'Acme\\QuestionBundle\\Controller\\QuestionController::answersAction',  '_route' => 'acme_question_answers',);
+            }
+
+        }
+
+        if (0 === strpos($pathinfo, '/mongodb')) {
+            // acme_store_homepage
+            if (0 === strpos($pathinfo, '/mongodb/crear') && preg_match('#^/mongodb/crear/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'acme_store_homepage')), array (  '_controller' => 'Acme\\StoreBundle\\Controller\\DefaultController::createAction',));
+            }
+
+            if (0 === strpos($pathinfo, '/mongodb/mostrar')) {
+                // acme_store_view
+                if (preg_match('#^/mongodb/mostrar/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'acme_store_view')), array (  '_controller' => 'Acme\\StoreBundle\\Controller\\DefaultController::showAction',));
+                }
+
+                // acme_store_all
+                if (rtrim($pathinfo, '/') === '/mongodb/mostrartodos') {
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'acme_store_all');
+                    }
+
+                    return array (  '_controller' => 'Acme\\StoreBundle\\Controller\\DefaultController::allAction',  '_route' => 'acme_store_all',);
+                }
+
+            }
+
+            // acme_store_delete
+            if (rtrim($pathinfo, '/') === '/mongodb/borrartodos') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'acme_store_delete');
+                }
+
+                return array (  '_controller' => 'Acme\\StoreBundle\\Controller\\DefaultController::deleteAllAction',  '_route' => 'acme_store_delete',);
+            }
+
         }
 
         // _welcome

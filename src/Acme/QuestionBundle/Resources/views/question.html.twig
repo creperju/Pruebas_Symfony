@@ -1,7 +1,25 @@
-<?php
-/* 
-* To change this template, choose Tools | Templates
-* and open the template in the editor.
-*/
+<!DOCTYPE html>
+<html>    
+    <head>
+        <title>Preguntas</title>
+    </head>
+    
+    <body>
+        <h3>Listado de preguntas ( {{ nP }} )</h3>
 
-?>
+        <p>
+            
+                Pregunta: {{ questions.getQuestiondescription }}<br/>
+                Respuesta(s):
+                    <ul>
+                        {% for answer in questions.getAnswers %}
+
+                            <li> {{ answer.getAnswerDescription }}</li>
+
+                        {% endfor %}
+                    </ul>
+          
+        </p>
+    
+    </body>
+</html>

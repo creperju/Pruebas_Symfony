@@ -13,14 +13,13 @@ class Product
     /**
      * @MongoDB\Id
      */
-    protected $id;
-    
+    protected $id;    
     
     /**
      *
      * @MongoDB\String 
      */
-    protected $producto_id;
+    protected $producto;
     
     /**
      * @MongoDB\String
@@ -33,20 +32,7 @@ class Product
     protected $price;
 
     
-    
-    /**
-     *  Set id
-     * 
-     * @param string $id
-     * @return self
-     */
-    public function setProductoId($id)
-    {
-        $this->producto_id = $id;
-        return $this;
-    }
-    
-    
+
     /**
      * Get id
      *
@@ -55,6 +41,28 @@ class Product
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set product
+     *
+     * @param string $product
+     * @return self
+     */
+    public function setProduct($product)
+    {
+        $this->producto = $product;
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return string $product
+     */
+    public function getProduct()
+    {
+        return $this->producto;
     }
 
     /**

@@ -1,0 +1,12 @@
+Pregunta creada:<br/>
+<ul>
+    <li>Pregunta id: <b>{{ id }}</b></li>
+    <li>Pregunta: <b>{{ question }}?</b></li>
+    <li>Respuestas ({{ c }}):
+        <ul>
+            {% for answer in answers %}
+                <li>{{ answer }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+</ul>

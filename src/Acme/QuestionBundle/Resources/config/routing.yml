@@ -1,3 +1,25 @@
 acme_question_homepage:
-    pattern:  /question/
+    pattern:  /question
     defaults: { _controller: AcmeQuestionBundle:Question:index }
+
+
+acme_question_question:
+    pattern:  /question/{id}
+    defaults: { _controller: AcmeQuestionBundle:Question:question }
+
+
+acme_question_create:
+    pattern:  /question/create/{pregunta}
+    defaults: { _controller: AcmeQuestionBundle:Question:create }
+
+
+
+acme_question_deleteAll:
+    pattern:  /question/delete
+    defaults: { _controller: AcmeQuestionBundle:Question:deleteAll }
+    
+    
+
+acme_question_answers:
+    pattern:  /question/answers
+    defaults: { _controller: AcmeQuestionBundle:Question:answers }

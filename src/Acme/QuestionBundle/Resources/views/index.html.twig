@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>    
+    <head>
+        <title>Preguntas</title>
+    </head>
+    
+    <body>
+        <h3>Listado de preguntas ( {{ nP }} )</h3>
+
+        <p>
+            {% for question in questions %}
+                Pregunta: {{ question.getQuestiondescription }}<br/>
+                Respuesta(s):
+                    <ul>
+                        {% for answer in question.getAnswers %}
+
+                            <li> {{ answer.getAnswerDescription }}</li>
+
+                        {% endfor %}
+                    </ul>
+            {% endfor %}
+        </p>
+    
+    </body>
+</html>

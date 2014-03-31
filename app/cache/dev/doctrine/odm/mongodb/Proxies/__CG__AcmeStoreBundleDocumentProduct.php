@@ -44,10 +44,55 @@ class Product extends \Acme\StoreBundle\Document\Product implements \Doctrine\OD
     }
 
     
+    public function getId()
+    {
+        if ($this->__isInitialized__ === false) {
+            return $this->__identifier__;
+        }
+        $this->__load();
+        return parent::getId();
+    }
+
+    public function setProduct($product)
+    {
+        $this->__load();
+        return parent::setProduct($product);
+    }
+
+    public function getProduct()
+    {
+        $this->__load();
+        return parent::getProduct();
+    }
+
+    public function setName($name)
+    {
+        $this->__load();
+        return parent::setName($name);
+    }
+
+    public function getName()
+    {
+        $this->__load();
+        return parent::getName();
+    }
+
+    public function setPrice($price)
+    {
+        $this->__load();
+        return parent::setPrice($price);
+    }
+
+    public function getPrice()
+    {
+        $this->__load();
+        return parent::getPrice();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'name', 'price');
+        return array('__isInitialized__', 'id', 'producto', 'name', 'price');
     }
 
     public function __clone()

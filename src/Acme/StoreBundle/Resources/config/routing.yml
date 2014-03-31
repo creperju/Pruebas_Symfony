@@ -1,7 +1,15 @@
 acme_store_homepage:
-    pattern:  /hello/{name}
+    pattern:  /mongodb/crear/{id}
     defaults: { _controller: AcmeStoreBundle:Default:create }
 
-acme_store_vista:
-    pattern:  /mongodb/
+acme_store_view:
+    pattern:  /mongodb/mostrar/{id}
     defaults: { _controller: AcmeStoreBundle:Default:show }
+    
+acme_store_all:
+    pattern:  /mongodb/mostrartodos/
+    defaults: { _controller: AcmeStoreBundle:Default:all }
+
+acme_store_delete:
+    pattern:  /mongodb/borrartodos/
+    defaults: { _controller: AcmeStoreBundle:Default:deleteAll }

@@ -36,6 +36,14 @@ class AcmeStoreBundleDocumentProductHydrator implements HydratorInterface
         }
 
         /** @Field(type="string") */
+        if (isset($data['producto'])) {
+            $value = $data['producto'];
+            $return = (string) $value;
+            $this->class->reflFields['producto']->setValue($document, $return);
+            $hydratedData['producto'] = $return;
+        }
+
+        /** @Field(type="string") */
         if (isset($data['name'])) {
             $value = $data['name'];
             $return = (string) $value;
