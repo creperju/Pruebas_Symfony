@@ -137,7 +137,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         if (0 === strpos($pathinfo, '/question')) {
             // acme_question_homepage
-            if ($pathinfo === '/question') {
+            if (rtrim($pathinfo, '/') === '/question') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'acme_question_homepage');
+                }
+
                 return array (  '_controller' => 'Acme\\QuestionBundle\\Controller\\QuestionController::indexAction',  '_route' => 'acme_question_homepage',);
             }
 
@@ -152,13 +156,30 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
 
             // acme_question_deleteAll
-            if ($pathinfo === '/question/delete') {
+            if (rtrim($pathinfo, '/') === '/question/delete') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'acme_question_deleteAll');
+                }
+
                 return array (  '_controller' => 'Acme\\QuestionBundle\\Controller\\QuestionController::deleteAllAction',  '_route' => 'acme_question_deleteAll',);
             }
 
             // acme_question_answers
-            if ($pathinfo === '/question/answers') {
+            if (rtrim($pathinfo, '/') === '/question/answers') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'acme_question_answers');
+                }
+
                 return array (  '_controller' => 'Acme\\QuestionBundle\\Controller\\QuestionController::answersAction',  '_route' => 'acme_question_answers',);
+            }
+
+            // acme_question_form
+            if (rtrim($pathinfo, '/') === '/questions/form') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'acme_question_form');
+                }
+
+                return array (  '_controller' => 'Acme\\QuestionBundle\\Controller\\QuestionController::formAction',  '_route' => 'acme_question_form',);
             }
 
         }

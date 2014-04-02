@@ -5,21 +5,61 @@
     </head>
     
     <body>
-        <h3>Listado de preguntas ( {{ nP }} )</h3>
-
-        <p>
+        <div class="container show-top-margin separate-rows tall-rows">
+            <div class="row show-grid">
+                <div class="col-md-12">
+                    <h1>PROYECTO</h1>
+                </div>
+            </div>
             
-                Pregunta: {{ questions.getQuestiondescription }}<br/>
-                Respuesta(s):
-                    <ul>
-                        {% for answer in questions.getAnswers %}
+            <div class="row show-grid">
+                <div class="col-md-12">
+                    <h2>{{ question.getQuestiondescription }}</h2>
+                </div>
+            </div>
+            
+            <div class="row show-grid">
+                <div class="col-md-9">
+                    {% if answers > 0 %}
+                            {% if answers != 1 %}
+                                <div class="col-md-12">{{ answers }} respuestas</div>
+                            {% else %}
+                                <div class="col-md-12">{{ answers }} respuesta</div>
+                            {% endif %}
+                            
+                            <div class="col-md-offset-1">
+                                <ul class="list-unstyled">
+                                    {% for answer in question.getAnswers %}
 
-                            <li> {{ answer.getAnswerDescription }}</li>
+                                        <li> {{ answer.getAnswerDescription }}</li>
 
-                        {% endfor %}
-                    </ul>
-          
-        </p>
-    
+                                    {% endfor %}
+                                </ul>
+                            </div>   
+                        
+                    {% else %}
+                        <div class="col-md-12">No hay respuestas</div>
+                    {% endif %}
+                       
+                    <div class="col-md-12">
+                        <form>
+                            <textarea class="form-control" rows="3"></textarea>
+                            <button type="button" class="btn btn-primary">Answer now!</button>
+                        </form>
+                    </div>
+                    
+                        
+                </div>
+                
+                <div class="col-md-3">
+                    Sidebar
+                </div>
+                
+            </div>
+
+        </div>
+        
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" />
     </body>
 </html>

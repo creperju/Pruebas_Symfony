@@ -23,41 +23,101 @@ class __TwigTemplate_c65dcd76593adb4d608a363e49176f1cd324f9f09ce30ec244dfaa578cd
     </head>
     
     <body>
-        <h3>Listado de preguntas ( ";
-        // line 8
-        echo twig_escape_filter($this->env, (isset($context["nP"]) ? $context["nP"] : $this->getContext($context, "nP")), "html", null, true);
-        echo " )</h3>
-
-        <p>
+        <div class=\"container show-top-margin separate-rows tall-rows\">
+            <div class=\"row show-grid\">
+                <div class=\"col-md-12\">
+                    <h1>PROYECTO</h1>
+                </div>
+            </div>
             
-                Pregunta: ";
-        // line 12
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["questions"]) ? $context["questions"] : $this->getContext($context, "questions")), "getQuestiondescription"), "html", null, true);
-        echo "<br/>
-                Respuesta(s):
-                    <ul>
-                        ";
-        // line 15
-        $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["questions"]) ? $context["questions"] : $this->getContext($context, "questions")), "getAnswers"));
-        foreach ($context['_seq'] as $context["_key"] => $context["answer"]) {
-            // line 16
-            echo "
-                            <li> ";
-            // line 17
-            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["answer"]) ? $context["answer"] : $this->getContext($context, "answer")), "getAnswerDescription"), "html", null, true);
-            echo "</li>
+            <div class=\"row show-grid\">
+                <div class=\"col-md-12\">
+                    <h2>";
+        // line 17
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["question"]) ? $context["question"] : $this->getContext($context, "question")), "getQuestiondescription"), "html", null, true);
+        echo "</h2>
+                </div>
+            </div>
+            
+            <div class=\"row show-grid\">
+                <div class=\"col-md-9\">
+                    ";
+        // line 23
+        if (((isset($context["answers"]) ? $context["answers"] : $this->getContext($context, "answers")) > 0)) {
+            // line 24
+            echo "                            ";
+            if (((isset($context["answers"]) ? $context["answers"] : $this->getContext($context, "answers")) != 1)) {
+                // line 25
+                echo "                                <div class=\"col-md-12\">";
+                echo twig_escape_filter($this->env, (isset($context["answers"]) ? $context["answers"] : $this->getContext($context, "answers")), "html", null, true);
+                echo " respuestas</div>
+                            ";
+            } else {
+                // line 27
+                echo "                                <div class=\"col-md-12\">";
+                echo twig_escape_filter($this->env, (isset($context["answers"]) ? $context["answers"] : $this->getContext($context, "answers")), "html", null, true);
+                echo " respuesta</div>
+                            ";
+            }
+            // line 29
+            echo "                            
+                            <div class=\"col-md-offset-1\">
+                                <ul class=\"list-unstyled\">
+                                    ";
+            // line 32
+            $context['_parent'] = (array) $context;
+            $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["question"]) ? $context["question"] : $this->getContext($context, "question")), "getAnswers"));
+            foreach ($context['_seq'] as $context["_key"] => $context["answer"]) {
+                // line 33
+                echo "
+                                        <li> ";
+                // line 34
+                echo twig_escape_filter($this->env, $this->getAttribute((isset($context["answer"]) ? $context["answer"] : $this->getContext($context, "answer")), "getAnswerDescription"), "html", null, true);
+                echo "</li>
 
-                        ";
+                                    ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['answer'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 37
+            echo "                                </ul>
+                            </div>   
+                        
+                    ";
+        } else {
+            // line 41
+            echo "                        <div class=\"col-md-12\">No hay respuestas</div>
+                    ";
         }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['answer'], $context['_parent'], $context['loop']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 20
-        echo "                    </ul>
-          
-        </p>
-    
+        // line 43
+        echo "                       
+                    <div class=\"col-md-12\">
+                        <form>
+                            <textarea class=\"form-control\" rows=\"3\"></textarea>
+                            <button type=\"button\" class=\"btn btn-primary\">Answer now!</button>
+                        </form>
+                    </div>
+                    
+                        
+                </div>
+                
+                <div class=\"col-md-3\">
+                    Sidebar
+                </div>
+                
+            </div>
+
+        </div>
+        
+        <link href=\"";
+        // line 62
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("css/bootstrap.min.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" type=\"text/css\" />
+        <link href=\"";
+        // line 63
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("css/main.css"), "html", null, true);
+        echo "\" rel=\"stylesheet\" type=\"text/css\" />
     </body>
 </html>";
     }
@@ -74,6 +134,6 @@ class __TwigTemplate_c65dcd76593adb4d608a363e49176f1cd324f9f09ce30ec244dfaa578cd
 
     public function getDebugInfo()
     {
-        return array (  57 => 20,  48 => 17,  45 => 16,  41 => 15,  35 => 12,  28 => 8,  19 => 1,);
+        return array (  119 => 63,  115 => 62,  94 => 43,  90 => 41,  84 => 37,  75 => 34,  72 => 33,  68 => 32,  63 => 29,  57 => 27,  51 => 25,  48 => 24,  46 => 23,  37 => 17,  19 => 1,);
     }
 }

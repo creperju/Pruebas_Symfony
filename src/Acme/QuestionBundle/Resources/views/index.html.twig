@@ -2,24 +2,51 @@
 <html>    
     <head>
         <title>Preguntas</title>
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css" />
     </head>
     
     <body>
-        <h3>Listado de preguntas ( {{ nP }} )</h3>
-
-        <p>
-            {% for question in questions %}
-                Pregunta: {{ question.getQuestiondescription }}<br/>
-                Respuesta(s):
-                    <ul>
-                        {% for answer in question.getAnswers %}
-
-                            <li> {{ answer.getAnswerDescription }}</li>
-
-                        {% endfor %}
-                    </ul>
-            {% endfor %}
-        </p>
-    
+        <div class="container show-top-margin separate-rows tall-rows">
+            
+            <!-- Encabezado -->
+            <div class="row show-grid">
+                <div class="col-md-12">
+                    <h1>Listado de preguntas ( {{ nP }} )</h1>
+                </div>
+            </div>
+            
+            <div class="row show-grid">
+                {{ form(form) }}
+                               
+            </div>
+            
+            <div class="row show-grid">
+                
+                    {% for question in questions %}
+                        <div class="col-md-12">
+                            <p class="text-info">
+                                <a href="{{ url }}{{ question.getId }}">
+                                    Pregunta: {{ question.getQuestiondescription }}
+                                </a>
+                            </p>
+                        </div>                    
+                    {% endfor %}
+                
+            </div>
+            
+            <!-- Botones de acción para mostrar más preguntas -->
+            <div class="row">
+                <div class="col-md-offset-9">
+                    <button class="btn btn-default">&lt;Prev</button>
+                    <button class="btn btn-default">1</button>
+                    <button class="btn btn-default">2</button>
+                    <button class="btn btn-default">&gt;Next</button>
+                </div>
+            </div>
+        
+        
+        </div>
+        
     </body>
 </html>

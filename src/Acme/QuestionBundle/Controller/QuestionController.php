@@ -6,20 +6,43 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Acme\QuestionBundle\Document\Question;
 use Acme\QuestionBundle\Document\Answer;
 
+
+use Acme\QuestionBundle\Entity\Task;
+use Symfony\Component\HttpFoundation\Request;
+
 class QuestionController extends Controller
 {
     
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        // Show all question
         $questions = $this->get('doctrine_mongodb')
                     ->getRepository('AcmeQuestionBundle:Question')
                     ->findAll();
+        
+        // Create form        
+        $defaultData = array('message' => 'Type your message here');
+        $form = $this->createFormBuilder($defaultData)
+            ->add('question', 'text')
+            ->add('Ask know!', 'submit')
+            ->getForm();
+ 
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            // data es un array con claves 'name', 'email', y 'message'
+            $data = $form->getData();
+        }
+ 
+        
         
         return $this->render(   'AcmeQuestionBundle::index.html.twig',
                                 array
                                 (     
                                     'questions' => $questions,
-                                    'nP' => count($questions)
+                                    'nP' => count($questions),
+                                    'url' => $_SERVER['REQUEST_URI'],
+                                    'form' => $form->createView()
                                 )
         );
         
@@ -31,7 +54,7 @@ class QuestionController extends Controller
 //        if (is_null($action))
 //        {
             // Get all data
-            $questions = $this->get('doctrine_mongodb')
+            $question = $this->get('doctrine_mongodb')
                     ->getRepository('AcmeQuestionBundle:Question')
                     ->find($id);
             
@@ -55,7 +78,7 @@ class QuestionController extends Controller
         
 //        if (!count($questions) or is_string($action)) {
 //          if (! count($datos['questions']) )
-          if ( ! $questions )
+          if ( ! $question )
             return $this->render(  'AcmeQuestionBundle::default.html.twig',
                                     array
                                     (   
@@ -71,8 +94,8 @@ class QuestionController extends Controller
         return $this->render(   'AcmeQuestionBundle::question.html.twig',
                                 array
                                 (     
-                                    'questions' => $questions,
-                                    'nP' => count($questions),
+                                    'question' => $question,
+                                    'answers' => count($question->getAnswers())
                                 )
         );
     }
@@ -147,6 +170,25 @@ class QuestionController extends Controller
         
         return $this->render("AcmeQuestionBundle::answers.html.twig",array('answers' => $answers));
         
+    }
+    
+    
+    
+    public function formAction()
+    {
+        $task = new Task();
+        $task->setTask('Write a blog post');
+        $task->setDueDate(new \DateTime('tomorrow'));
+ 
+        $form = $this->createFormBuilder($task)
+            ->add('task', 'text')
+            ->add('dueDate', 'date')
+            ->add('save', 'submit')
+            ->getForm();
+ 
+        return $this->render('AcmeQuestionBundle::form.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
     
     
