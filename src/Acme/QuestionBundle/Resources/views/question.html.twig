@@ -45,8 +45,9 @@
                        
                     <div class="col-md-12">
                         {{ form_start(form) }}
-                            
-                            {{ form_widget(form.question) }}
+                            {{ form_widget(form.answerdescription) }}
+                            {{ form_rest(form) }}
+                            <input type="submit" value="Answer now!" />
                             
                         <!--<form>
                             <textarea class="form-control" rows="3"></textarea>

@@ -7,7 +7,7 @@ use Acme\QuestionBundle\Document\Question;
 use Acme\QuestionBundle\Document\Answer;
 use \Symfony\Component\HttpFoundation\Request;
 use Acme\QuestionBundle\Form\QuestionType;
- 
+use Acme\QuestionBundle\Form\AnswerType;
 
 
 class QuestionController extends Controller
@@ -37,7 +37,7 @@ class QuestionController extends Controller
             ->add('question', 'text')
             ->add('Ask know!', 'submit')
             ->getForm();
-            */
+        */
         $form->handleRequest($request);
         
         if ($form->isValid()) {
@@ -91,27 +91,32 @@ class QuestionController extends Controller
                     ->find($id);
 
 
-            
+            /*
             // Create form        
             $defaultData = array('message' => 'Type your message here');
             $form = $this->createFormBuilder($defaultData)
                     ->add('answer', 'textarea')
                     ->add('Answer now!', 'submit')
                     ->getForm();
- 
+            */
+            
+            $answer = new Answer();
+            $form = $this->createForm(new AnswerType(), $answer);
+        
+            
             $form->handleRequest($request);
 
             if ($form->isValid()) {
                 // data es un array con claves 'question', 'answer'
-                $data = $form->getData();
-
-                $answer = new Answer();
-                
+//                $data = $form->getData();
+//
+//                $answer = new Answer();
+//                
 //                print_r($data);print($id);exit(0);
-                
-                $answer->setQuestion($question);
-                $answer->setAnswerDescription($data['answer']);
-                
+//                
+//                $answer->setQuestion($question);
+//                $answer->setAnswerDescription($data['answer']);
+//                
                 $question->addAnswer($answer);
                 
 

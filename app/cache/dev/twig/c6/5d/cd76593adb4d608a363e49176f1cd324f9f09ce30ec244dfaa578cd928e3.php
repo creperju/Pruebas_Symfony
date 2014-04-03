@@ -99,11 +99,15 @@ class __TwigTemplate_c65dcd76593adb4d608a363e49176f1cd324f9f09ce30ec244dfaa578cd
         // line 47
         echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_start');
         echo "
-                            
+                            ";
+        // line 48
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "answerdescription"), 'widget');
+        echo "
                             ";
         // line 49
-        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "question"), 'widget');
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'rest');
         echo "
+                            <input type=\"submit\" value=\"Answer now!\" />
                             
                         <!--<form>
                             <textarea class=\"form-control\" rows=\"3\"></textarea>
@@ -123,11 +127,11 @@ class __TwigTemplate_c65dcd76593adb4d608a363e49176f1cd324f9f09ce30ec244dfaa578cd
         </div>
         
         <link href=\"";
-        // line 68
+        // line 69
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("css/bootstrap.min.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" type=\"text/css\" />
         <link href=\"";
-        // line 69
+        // line 70
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("css/main.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" type=\"text/css\" />
     </body>
@@ -146,6 +150,6 @@ class __TwigTemplate_c65dcd76593adb4d608a363e49176f1cd324f9f09ce30ec244dfaa578cd
 
     public function getDebugInfo()
     {
-        return array (  131 => 69,  127 => 68,  105 => 49,  100 => 47,  96 => 45,  92 => 43,  86 => 39,  77 => 36,  74 => 35,  70 => 34,  65 => 31,  59 => 29,  53 => 27,  50 => 26,  48 => 25,  39 => 19,  19 => 1,);
+        return array (  135 => 70,  131 => 69,  108 => 49,  104 => 48,  100 => 47,  96 => 45,  92 => 43,  86 => 39,  77 => 36,  74 => 35,  70 => 34,  65 => 31,  59 => 29,  53 => 27,  50 => 26,  48 => 25,  39 => 19,  19 => 1,);
     }
 }
