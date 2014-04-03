@@ -46,28 +46,36 @@ class __TwigTemplate_a245cfc2ba62f3e223bf3c939de64f1bffa6c4905c8483ba8ad0c2ab354
             <div class=\"row show-grid\">
                 ";
         // line 20
-        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form');
+        echo         $this->env->getExtension('form')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_start');
         echo "
-                               
+                    ";
+        // line 21
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "questiondescription"), 'widget');
+        echo "
+                    ";
+        // line 22
+        echo $this->env->getExtension('form')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'rest');
+        echo "
+                    <input type=\"submit\" value=\"Ask know!\" />
             </div>
             
             <div class=\"row show-grid\">
                 
                     ";
-        // line 26
+        // line 28
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["questions"]) ? $context["questions"] : $this->getContext($context, "questions")));
         foreach ($context['_seq'] as $context["_key"] => $context["question"]) {
-            // line 27
+            // line 29
             echo "                        <div class=\"col-md-12\">
                             <p class=\"text-info\">
                                 <a href=\"";
-            // line 29
+            // line 31
             echo twig_escape_filter($this->env, (isset($context["url"]) ? $context["url"] : $this->getContext($context, "url")), "html", null, true);
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["question"]) ? $context["question"] : $this->getContext($context, "question")), "getId"), "html", null, true);
             echo "\">
                                     Pregunta: ";
-            // line 30
+            // line 32
             echo twig_escape_filter($this->env, $this->getAttribute((isset($context["question"]) ? $context["question"] : $this->getContext($context, "question")), "getQuestiondescription"), "html", null, true);
             echo "
                                 </a>
@@ -78,7 +86,7 @@ class __TwigTemplate_a245cfc2ba62f3e223bf3c939de64f1bffa6c4905c8483ba8ad0c2ab354
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['question'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 35
+        // line 37
         echo "                
             </div>
             
@@ -111,6 +119,6 @@ class __TwigTemplate_a245cfc2ba62f3e223bf3c939de64f1bffa6c4905c8483ba8ad0c2ab354
 
     public function getDebugInfo()
     {
-        return array (  82 => 35,  71 => 30,  66 => 29,  62 => 27,  58 => 26,  49 => 20,  41 => 15,  29 => 6,  25 => 5,  19 => 1,);
+        return array (  90 => 37,  79 => 32,  74 => 31,  70 => 29,  66 => 28,  57 => 22,  53 => 21,  49 => 20,  41 => 15,  29 => 6,  25 => 5,  19 => 1,);
     }
 }

@@ -5,14 +5,20 @@ namespace Acme\QuestionBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Acme\QuestionBundle\Document\Question;
 use Acme\QuestionBundle\Document\Answer;
+use \Symfony\Component\HttpFoundation\Request;
+use Acme\QuestionBundle\Form\QuestionType;
+ 
 
-
-use Acme\QuestionBundle\Entity\Task;
-use Symfony\Component\HttpFoundation\Request;
 
 class QuestionController extends Controller
 {
     
+    /**
+     * Show all questions and register new question in a form.
+     * 
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return type
+     */
     public function indexAction(Request $request)
     {
         // Show all question
@@ -20,18 +26,39 @@ class QuestionController extends Controller
                     ->getRepository('AcmeQuestionBundle:Question')
                     ->findAll();
         
-        // Create form        
+        
+        $question = new Question();
+        $form = $this->createForm(new QuestionType(), $question);
+        
+        
+        /*// Create form        
         $defaultData = array('message' => 'Type your message here');
         $form = $this->createFormBuilder($defaultData)
             ->add('question', 'text')
             ->add('Ask know!', 'submit')
             ->getForm();
- 
+            */
         $form->handleRequest($request);
-
+        
         if ($form->isValid()) {
-            // data es un array con claves 'name', 'email', y 'message'
-            $data = $form->getData();
+            // data es un array con claves 'question'
+//            $data = $form->get('questiondescription')->getData();
+            
+//            print_r($data);exit(0);
+//            
+//            $question = new Question();
+//            $question->setQuestionDescription($data['question']);
+//            
+            $dm = $this->get('doctrine_mongodb')->getManager();
+            $dm->persist($question);
+            $dm->flush();
+            
+            
+            
+            // generateUrl contiene el nombre que se le da
+            // en routing.yml con su patron y metodo a ejecutar
+            return $this->redirect($this->generateUrl('acme_question_homepage'));
+            
         }
  
         
@@ -49,55 +76,88 @@ class QuestionController extends Controller
         
     }
     
-    public function questionAction($id)
+    
+    /**
+     * Show question with it answers and register new answer.
+     * 
+     * @param type $id
+     * @return type
+     */
+    public function questionAction($id, Request $request)
     {
-//        if (is_null($action))
-//        {
-            // Get all data
+            // Find a question and it answers.
             $question = $this->get('doctrine_mongodb')
                     ->getRepository('AcmeQuestionBundle:Question')
                     ->find($id);
+
+
             
+            // Create form        
+            $defaultData = array('message' => 'Type your message here');
+            $form = $this->createFormBuilder($defaultData)
+                    ->add('answer', 'textarea')
+                    ->add('Answer now!', 'submit')
+                    ->getForm();
+ 
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                // data es un array con claves 'question', 'answer'
+                $data = $form->getData();
+
+                $answer = new Answer();
+                
+//                print_r($data);print($id);exit(0);
+                
+                $answer->setQuestion($question);
+                $answer->setAnswerDescription($data['answer']);
+                
+                $question->addAnswer($answer);
+                
+
+                $dm = $this->get('doctrine_mongodb')->getManager();
+                
+                $dm->persist($question);
+                $dm->persist($answer);
+                $dm->flush();
+
+
+
+                // generateUrl contiene el nombre que se le da
+                // en routing.yml con su patron y metodo a ejecutar
+                return $this->redirect($this->generateUrl(
+                                                    'acme_question_question',
+                                                    array('id' => $id)
+                                                )
+                                );
+
+            }
             
-            
-            
-            
-            
-            
-//        }
-//        else
-//        {
-//            // Delete all data
-//            $questions = $this->get('doctrine_mongodb')
-//                    ->getRepository('AcmeQuestionBundle:Question')
-//                    ->findAll()
-//                    ->drop();
-//            
-//        }
-        
-        
-//        if (!count($questions) or is_string($action)) {
-//          if (! count($datos['questions']) )
-          if ( ! $question )
-            return $this->render(  'AcmeQuestionBundle::default.html.twig',
+
+
+
+
+            if ( ! $question )
+                return $this->render(  'AcmeQuestionBundle::default.html.twig',
+                                        array
+                                        (   
+                                            'message' => 'Pregunta no encontrada',
+                                            'url' => $this->generateUrl('acme_question_homepage')
+                                        )
+                );
+          
+          
+          
+          
+          
+            return $this->render(   'AcmeQuestionBundle::question.html.twig',
                                     array
-                                    (   
-                                        'message' => 'No hay datos, créelos',
-                                        'url' => $_SERVER['REQUEST_URI'].'create'
+                                    (     
+                                        'question' => $question,
+                                        'answers' => count($question->getAnswers()),
+                                        'form' => $form->createView()
                                     )
             );
-//        }
-        
-        // Response with all questions
-//        print_r($questions);
-//        die();
-        return $this->render(   'AcmeQuestionBundle::question.html.twig',
-                                array
-                                (     
-                                    'question' => $question,
-                                    'answers' => count($question->getAnswers())
-                                )
-        );
     }
     
     
@@ -173,23 +233,6 @@ class QuestionController extends Controller
     }
     
     
-    
-    public function formAction()
-    {
-        $task = new Task();
-        $task->setTask('Write a blog post');
-        $task->setDueDate(new \DateTime('tomorrow'));
- 
-        $form = $this->createFormBuilder($task)
-            ->add('task', 'text')
-            ->add('dueDate', 'date')
-            ->add('save', 'submit')
-            ->getForm();
- 
-        return $this->render('AcmeQuestionBundle::form.html.twig', array(
-            'form' => $form->createView(),
-        ));
-    }
     
     
 }

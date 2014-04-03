@@ -173,15 +173,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'Acme\\QuestionBundle\\Controller\\QuestionController::answersAction',  '_route' => 'acme_question_answers',);
             }
 
-            // acme_question_form
-            if (rtrim($pathinfo, '/') === '/questions/form') {
-                if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', 'acme_question_form');
-                }
-
-                return array (  '_controller' => 'Acme\\QuestionBundle\\Controller\\QuestionController::formAction',  '_route' => 'acme_question_form',);
-            }
-
         }
 
         if (0 === strpos($pathinfo, '/mongodb')) {

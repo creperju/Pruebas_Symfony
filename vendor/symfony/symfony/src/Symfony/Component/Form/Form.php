@@ -731,18 +731,19 @@ class Form implements \IteratorAggregate, FormInterface
      */
     public function isValid()
     {
+        
         if (!$this->submitted) {
             return false;
         }
-
+      
         if (count($this->errors) > 0) {
-            return false;
+            return false; 
         }
-
+        
         if ($this->isDisabled()) {
             return true;
         }
-
+        
         foreach ($this->children as $child) {
             if ($child->isSubmitted() && !$child->isValid()) {
                 return false;

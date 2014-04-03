@@ -19,10 +19,10 @@ class __TwigTemplate_ff1c0b99853358dab9f83602af2730af5f5217e95a132f1611c61c2557f
         echo twig_escape_filter($this->env, (isset($context["message"]) ? $context["message"] : $this->getContext($context, "message")), "html", null, true);
         echo "
 <br/>
-URL: <a href='";
+<a href='";
         // line 3
         echo twig_escape_filter($this->env, (isset($context["url"]) ? $context["url"] : $this->getContext($context, "url")), "html", null, true);
-        echo "'>Crear</a>";
+        echo "'>Volver</a>";
     }
 
     public function getTemplateName()

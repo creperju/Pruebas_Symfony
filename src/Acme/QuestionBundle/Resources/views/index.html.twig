@@ -17,8 +17,10 @@
             </div>
             
             <div class="row show-grid">
-                {{ form(form) }}
-                               
+                {{ form_start(form) }}
+                    {{ form_widget(form.questiondescription) }}
+                    {{ form_rest(form) }}
+                    <input type="submit" value="Ask know!" />
             </div>
             
             <div class="row show-grid">

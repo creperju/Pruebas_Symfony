@@ -6,9 +6,11 @@
     
     <body>
         <div class="container show-top-margin separate-rows tall-rows">
+            
+            <!-- Encabezado -->
             <div class="row show-grid">
                 <div class="col-md-12">
-                    <h1>PROYECTO</h1>
+                    <h1>Proyecto</h1>
                 </div>
             </div>
             
@@ -27,7 +29,7 @@
                                 <div class="col-md-12">{{ answers }} respuesta</div>
                             {% endif %}
                             
-                            <div class="col-md-offset-1">
+                            <div class="col-md-offset-1 col-md-11">
                                 <ul class="list-unstyled">
                                     {% for answer in question.getAnswers %}
 
@@ -42,10 +44,14 @@
                     {% endif %}
                        
                     <div class="col-md-12">
-                        <form>
+                        {{ form_start(form) }}
+                            
+                            {{ form_widget(form.question) }}
+                            
+                        <!--<form>
                             <textarea class="form-control" rows="3"></textarea>
                             <button type="button" class="btn btn-primary">Answer now!</button>
-                        </form>
+                        </form>-->
                     </div>
                     
                         

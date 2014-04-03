@@ -26,11 +26,3 @@ acme_question_answers:
     
     
     
-    
-    
-    
-    
- 
-acme_question_form:
-    pattern:  /questions/form/
-    defaults: { _controller: AcmeQuestionBundle:Question:form }   
